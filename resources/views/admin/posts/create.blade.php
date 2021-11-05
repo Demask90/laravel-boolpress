@@ -17,7 +17,7 @@
                     </div>
                 @endif --}}
 
-                <form action="{{ route('admin.post.store') }}" method="POST">
+                <form action="{{ route('admin.posts.store') }}" method="POST">
                     @csrf
                     @method('POST')
                     <div class="form-group">
