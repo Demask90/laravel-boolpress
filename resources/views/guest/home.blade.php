@@ -51,7 +51,7 @@
                 text-transform: uppercase;
             }
             .m-b-md {
-                margin-bottom: 30px;
+                margin: 50px 0;
             }
         </style>
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
@@ -78,12 +78,12 @@
                 </div>
             @endif
 
-            <div class="content">
-                <div class="title m-b-md">
-                    Il mio blog
-                </div>
-                <div class="d-flex">
-                    <h2><a href="{{route('posts.index')}}">BLOG</a></h2>
+            <div class="content d-flex flex-column align-items-center">
+                <h1 class="title m-b-md">
+                    IL MIO BLOG
+                </h1>
+                <div class="d-flex links">
+                    <a href="{{route('posts.index')}}">Posts</a>
                 </div>
             </div>
         </div>

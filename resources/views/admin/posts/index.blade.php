@@ -14,6 +14,7 @@
             <th scope="col">#</th>
             <th scope="col">Title</th>
             <th scope="col">slug</th>
+            <th scope="col">Category</th>
             <th scope="col">Actions</th>
         </tr>
         </thead>
@@ -23,6 +24,11 @@
                     <td scope="row">{{ $post['id'] }}</td>
                     <td>{{ $post['title'] }}</td>
                     <td>{{ $post['slug'] }}</td>
+                    <td>
+                        @if ($post->category)
+                        {{ $post->category->name }}
+                        @endif
+                    </td>
 
                     <td>
                         <a href="{{ route('admin.posts.show', $post->id) }}"
@@ -33,6 +39,7 @@
                             class="btn btn-warning">
                             Modify
                         </a>
+                        {{-- delete post viene riconosciuto nella funzione deleteform in app.js visualizzando il promp di conferma cancellazione (ogni classe con delete-post richiamerà la funzione e farà visualizzare il messaggio di conferma) --}}
                         <form class="d-inline-block delete-post" method="POST" action="{{ route('admin.posts.destroy', $post->id) }}">
                             @csrf
                             @method('DELETE')

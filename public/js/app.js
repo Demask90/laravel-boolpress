@@ -37268,10 +37268,32 @@ module.exports = function(module) {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
+__webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js"); // primo metodo
+// window.confirmDelete = function() {
+//     const resp= confirm('vuoi cancellare?');
+//     if(!resp) {
+//         // non lancia la richiesta al server
+//         event.preventDefault();
+//     }
+// }
 
-function confirmDelete() {
-  var resp = confirm('vuoi concellare?');
+
+var deleteform = document.querySelectorAll('.delete-post');
+deleteform.forEach(function (item) {
+  item.addEventListener('submit', function (e) {
+    var resp = confirm('Vuoi cancellare?');
+
+    if (!resp) {
+      e.preventDefault();
+    }
+  });
+});
+var alertDiv = document.querySelectorAll('.alert');
+
+if (alertDiv[0]) {
+  setTimeout(function () {
+    alertDiv[0].remove();
+  }, 1000);
 }
 
 /***/ }),
