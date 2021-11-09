@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use App\Post;
 use App\Category;
+use App\Tag;
 
 class PostController extends Controller
 {
@@ -28,8 +29,9 @@ class PostController extends Controller
      */
     public function create()
     {
-        $categories = Category::All();
-        return view('admin.posts.create', compact('categories'));
+        $categories = Category::all();
+        $tags = Tag::all();
+        return view('admin.posts.create', compact('categories', 'tags'));
     }
 
     /**
@@ -45,6 +47,7 @@ class PostController extends Controller
             'title' => 'required|max:255',
             'content' => 'required',
             'cotegory_id' => 'nullable|exists:categories,id',
+            'tags' => 'exists:tags,id'
         ]);
 
         $form_data = $request->all();
@@ -66,6 +69,9 @@ class PostController extends Controller
 
         $new_post->slug = $slug;
         $new_post->save();
+        // ATTACH (ALLA CREAZIONE DI UN NUOVO POST MI COLLEGO GIà ID DEI TAGS)
+        $new_post->tags()->attach($form_data['tags']);
+
         return redirect()->route('admin.posts.index')->with('status', 'Il post è stato correttamente salvato');
     }
 
@@ -97,8 +103,8 @@ class PostController extends Controller
         }
 
         $categories = Category::All();
-
-        return view('admin.posts.edit', compact('post', 'categories'));
+        $tags = Tag::all();
+        return view('admin.posts.edit', compact('post', 'categories','tags'));
     }
 
     /**
@@ -144,6 +150,8 @@ class PostController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy(Post $post) {
+
+        $post->tags()->attach($post->id);
         $post->delete();
         return redirect()->route('admin.posts.index')->with('status', 'Post eleminato');
     }
