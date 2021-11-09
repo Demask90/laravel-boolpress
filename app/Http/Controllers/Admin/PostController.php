@@ -43,7 +43,8 @@ class PostController extends Controller
 
         $request->validate([
             'title' => 'required|max:255',
-            'content' => 'required'
+            'content' => 'required',
+            'cotegory_id' => 'nullable|exists:categories,id',
         ]);
 
         $form_data = $request->all();
@@ -71,7 +72,7 @@ class PostController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param   Post $post
      * @return \Illuminate\Http\Response
      */
     public function show(Post $post) {

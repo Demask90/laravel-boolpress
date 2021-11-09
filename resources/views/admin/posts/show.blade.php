@@ -7,7 +7,8 @@
                 <h1>Visualizzazione post {{ $post->id }}</h1>
                 <h2>{{$post->title}}</h2>
                 <p>{{$post->content}}</p>
-                <small>Lo slug è {{ $post->slug }}</small>
+                <h5>Lo slug è {{ $post->slug }}</h5>
+                <h5>Categoria di appertenza: <a href="{{route('admin.categories.show', $post->category->id)}}">{{$post->category->name}}</a></h5>
             </div>
         </div>
     </div>

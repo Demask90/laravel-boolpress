@@ -37293,7 +37293,7 @@ var alertDiv = document.querySelectorAll('.alert');
 if (alertDiv[0]) {
   setTimeout(function () {
     alertDiv[0].remove();
-  }, 1000);
+  }, 2500);
 }
 
 /***/ }),
