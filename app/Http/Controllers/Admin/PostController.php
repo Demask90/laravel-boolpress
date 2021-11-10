@@ -102,9 +102,9 @@ class PostController extends Controller
             abort(404);
         }
 
-        $categories = Category::All();
+        $categories = Category::all();
         $tags = Tag::all();
-        return view('admin.posts.edit', compact('post', 'categories','tags'));
+        return view('admin.posts.edit', compact('post', 'categories', 'tags'));
     }
 
     /**
@@ -119,12 +119,17 @@ class PostController extends Controller
         // per prima cosa valido i dati che arrivano dal form
         $request->validate([
             'title' => 'required|max:255',
-            'content' => 'required'
+            'content' => 'required',
+            'category_id' => 'nullable|exists:categories,id',
+            'tags' => 'exists:tags,id',
+
         ]);
 
         $form_data = $request->all();
+        
         // verifico se il titolo ricevuto dal form è diverso dal vecchio titolo
         if ($form_data['title'] != $post->title) {
+
             // è stato modificato il titolo, quindi devo modificare anche lo slug
             $slug = Str::slug($form_data['title'], '-');
 
@@ -140,6 +145,16 @@ class PostController extends Controller
             $form_data['slug'] = $slug;
         }
         $post->update($form_data);
+        
+        // devo verificare che la chiavi tags nel $form data esistano, nel caso in cui non ci siano fammi comunque un sync vuoto (altrimenti non mi effettua la modifica se deseleziono tutti i tags nella modifica)
+        // per aggiungere ed eliminare contemporaneamente dei record all'interno della tabella ponte utilizziamo il sync()
+        if(array_key_exists('tags', $form_data)) {
+            $post->tags()->sync($form_data['tags']);
+        } else {
+            $post->tags()->sync([]);
+        }
+        
+
         return redirect()->route('admin.posts.index')->with('status', 'Post correttamente aggiornato');
     }
 
@@ -151,7 +166,7 @@ class PostController extends Controller
      */
     public function destroy(Post $post) {
 
-        $post->tags()->attach($post->id);
+        $post->tags()->detach($post->id);
         $post->delete();
         return redirect()->route('admin.posts.index')->with('status', 'Post eleminato');
     }

@@ -34,9 +34,17 @@
                     <p>Seleziona i Tag:</p>
                     @foreach ($tags as $tag)
                         <div class="form-check form-check-inline">
-                            {{-- se i tags id correlati al post contengono il tag attuale mettilo checked ( se il post ha già dei tags mostra quelli gia impostati nel post prima della modifica) --}}
-                            <input {{$post->tags->contains($tag) ? 'checked' : null}} value="{{$tag->id}}" id="{{'tag'. $tag->id}}" type="checkbox" name="tags[]" class="form-check-input">
-                            <label for="{{'tag'. $tag->id}}" class="form-check-label">{{ $tag->name}}</label>
+                            @if ($errors->any())
+                                {{-- se i tags già assegnati nella sezione modifica corrispondono al tag id attuale allora checked (devo definire nell' old che i tags verranno raccolti in un array--}}
+                                <input {{in_array($tag->id, old('tags', [])) ? 'checked' : null }} value="{{ $tag->id }}" id="{{ 'tag'. $tag->id }}" type="checkbox" name="tags[]" class="form-check-input">
+                                <label for="{{'tag'. $tag->id}}" class="form-check-label">{{ $tag->name}}</label>
+                            @else
+                                  {{-- se i tags id correlati al post contengono il tag attuale mettilo checked ( se il post ha già dei tags mostra quelli gia impostati nel post prima della modifica) --}}
+                                  <input {{ $post->tags->contains($tag->id) ? 'checked' : null }} value="{{ $tag->id }}" id="{{ 'tag'. $tag->id }}" type="checkbox" name="tags[]" class="form-check-input">
+                                  <label for="{{'tag'. $tag->id}}" class="form-check-label">{{ $tag->name}}</label>
+                            @endif
+
+                            
                         </div>
                     @endforeach
                 </div>
