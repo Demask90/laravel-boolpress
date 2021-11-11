@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Str;
+use App\Tag;
+use App\Post;
 class TagController extends Controller
 {
     /**
@@ -14,7 +16,8 @@ class TagController extends Controller
      */
     public function index()
     {
-        //
+        $tags = Tag::all();
+        return view('admin.tags.index', compact('tags'));
     }
 
     /**
@@ -24,7 +27,7 @@ class TagController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.tags.create');
     }
 
     /**
@@ -35,7 +38,26 @@ class TagController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name'=>'required'
+        ]);
+
+        $form_data = $request->all();
+        $new_tag = new Tag();
+        $new_tag->fill($form_data);
+        $slug = Str::slug($new_tag->name, '-');
+
+        $slug_presente = Tag::where('slug', $slug)->first();
+        $contatore = 1;
+        while($slug_presente){
+            $slug = $slug . '-' . $contatore;
+            $slug_presente = Tag::where('slug', $slug)->first();
+            $contatore++;
+        }
+        $new_tag->slug = $slug;
+        $new_tag->save();
+
+        return redirect()->route('admin.tags.index')->with('status', 'Il tag è stata correttamente creato');
     }
 
     /**
@@ -46,7 +68,13 @@ class TagController extends Controller
      */
     public function show($id)
     {
-        //
+        {
+            $tags = Tag::where('id', $id)->first();
+            if(!$tags){
+                abort(404);
+            }return view('admin.tags.show', compact('tags'));
+        }
+    
     }
 
     /**
@@ -57,7 +85,8 @@ class TagController extends Controller
      */
     public function edit($id)
     {
-        //
+        $tags = Tag::where('id', $id)->first();
+        return view('admin.tags.edit', compact('tags'));
     }
 
     /**
@@ -67,9 +96,29 @@ class TagController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Tag $tags)
     {
-        //
+        $request->validate([
+            'name'=>'required'
+        ]);
+
+        $form_data = $request->all();
+        if($form_data['name'] != $tags->name){
+            $slug = Str::slug($form_data['name'], '-');
+
+            $slug_presente = Tag::where('slug', $slug)->first();
+            $contatore = 1;
+            while($slug_presente){
+                $slug = $slug . '-' . $contatore;
+                $slug_presente = Tag::where('slug', $slug)->first();
+                $contatore++;
+            }
+            $form_data['slug'] = $slug;
+        }
+
+        $tags->update($form_data);
+
+        return redirect()->route('admin.tags.index')->with('status', 'Il tag è stata correttamente modificato');
     }
 
     /**
@@ -78,8 +127,9 @@ class TagController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Tag $tags)
     {
-        //
+        $tags->delete();
+        return redirect()->route('admin.tags.index')->with('status', 'Tag eliminato');
     }
 }
