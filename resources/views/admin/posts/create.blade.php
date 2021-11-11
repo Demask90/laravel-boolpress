@@ -28,7 +28,7 @@
                         @enderror
                     </div>
                     <div class="form-group">
-                        <label for="title">Content</label>
+                        <label for="content">Content</label>
                         <textarea name="content" id="content" class="form-control @error('content') is-invalid @enderror">{!!old('content')!!}</textarea>
                         @error('content')
                             <div class="alert alert-danger">{{ $message }}</div>
@@ -61,3 +61,8 @@
         </div>
     </div>
 @endsection
+
+<style>
+
+    
+</style>

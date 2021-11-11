@@ -49,7 +49,7 @@ class PostController extends Controller
             'cotegory_id' => 'nullable|exists:categories,id',
             'tags' => 'exists:tags,id'
         ]);
-
+        // i dati vengono dalvati in $form_data
         $form_data = $request->all();
 
         $new_post = new Post();

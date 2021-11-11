@@ -1,14 +1,20 @@
 @extends('layouts.dashboard');
 
 @section('content')
-    <div class="container">
+    <div class="container ">
         <div class="row">
-            <div class="col-12">
-                <h1>Visualizzazione post {{ $post->id }}</h1>
-                <h2>{{$post->title}}</h2>
-                <p>{{$post->content}}</p>
-                <h5>Lo slug è {{ $post->slug }}</h5>
-                <h5>Categoria di appertenza: <a href="{{route('admin.categories.show', $post->category->id)}}">{{$post->category->name}}</a></h5>
+            <div class="card m-0 p-0 col-12">
+                
+                <h1 class="card-header bg-secondary text-white"> {{$post->title}} </h1>
+                <div class="card-text m-4">
+                    <h3>Contenuto:</h3>
+                    <p>{{$post->content}}</p>
+                </div>
+                <div class="card-text mx-4">   
+                    <h6>Visualizzazione del post numero: {{ $post->id }}</h6>
+                    <h6>Categoria di appertenza: <a href="{{route('admin.categories.show', $post->category->id)}}">{{$post->category->name}}</a></h6>
+                </div>
+                
             </div>
         </div>
     </div>

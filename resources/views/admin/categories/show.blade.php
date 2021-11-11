@@ -5,7 +5,8 @@
         <div class="row">
             <div class="col-12">
                 <h1 style="font-weight: bold">{{$category->name}}</h1>
-                <h5>Slug: {{ $category->slug }}</h5>
+                <h5>Descrizione: </h5>
+                <p>{{ $category->content }}</p>
             </div>
             <div class="col-12 my-5">
                 <h2 style="font-weight: bold">Lista dei post collegati alla categoria:</h2>

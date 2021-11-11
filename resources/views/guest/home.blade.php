@@ -14,7 +14,6 @@
             html, body {
                 background-color: #fff;
                 color: #636b6f;
-                font-family: 'Nunito', sans-serif;
                 font-weight: 200;
                 height: 100vh;
                 margin: 0;
@@ -31,15 +30,23 @@
                 position: relative;
             }
             .top-right {
-                position: absolute;
+                display: flex;
+                align-items: center;
+                justify-content: end;
+                width: 100%;
+                height: 60px;
                 right: 10px;
                 top: 18px;
             }
             .content {
                 text-align: center;
+                width: 100%;
+                height: calc(100vh - 60px);
+                justify-content: center
             }
             .title {
                 font-size: 84px;
+                color: #636b6f;
             }
             .links > a {
                 color: #636b6f;
@@ -58,7 +65,7 @@
 
     </head>
     <body>
-        <div class="flex-center">
+        <div>
             @if (Route::has('login'))
                 <div class="top-right links">
                     @auth

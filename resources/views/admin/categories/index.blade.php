@@ -29,12 +29,12 @@
                             class="btn btn-info">
                             Details
                         </a>
-                        <a href=""
+                        <a href="{{ route('admin.categories.edit', $category->id) }}"
                             class="btn btn-warning">
                             Modify
                         </a>
                         {{-- delete post viene riconosciuto nella funzione deleteform in app.js visualizzando il promp di conferma cancellazione (ogni classe con delete-post richiamerà la funzione e farà visualizzare il messaggio di conferma) --}}
-                        <form class="d-inline-block delete-category" method="POST" action="">
+                        <form class="d-inline-block delete-category" method="POST" action="{{ route('admin.categories.destroy', $category->id) }}">
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="btn btn-danger">Delete</button>
