@@ -5,7 +5,6 @@
         <div class="row">
             <div class="col-12">
                 <h2>Creazione nuovo post</h2>
-
                 {{-- primo metodo per visualizzare gli errori --}}
                 {{-- @if ($errors->any())
                     <div class="alert alert-danger">
@@ -16,6 +15,23 @@
                         </ul>
                     </div>
                 @endif --}}
+                <div>
+                    <h5>Crea un nuovo tag:</h5>
+                    <form method="POST">
+                        @csrf
+                        @method('POST')
+                        <div class="form-group">
+                            <input type="text" name="name" class="form-control">
+                            @error('name')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
+                        </div>
+                       
+                        <div class="form-group">
+                            <button type="submit" formaction="{{ route('admin.tags.store') }}" class="btn btn-success">Crea Tag</button>
+                        </div>
+                    </form>
+                </div>
                 <form action="{{ route('admin.posts.store') }}" method="POST">
                     @csrf
                     @method('POST')
@@ -44,7 +60,7 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <p>Seleziona i Tag:</p>
+                        <p>Tag esistenti:</p>
                         @foreach ($tags as $tag)
                             <div class="form-check form-check-inline">
                                 {{-- come definito nel file edit devo salvarmi le modifiche fatte ai tags,  in caso di errore nella creazione di un post mi tiene salvati i tags che ho selezionato--}}

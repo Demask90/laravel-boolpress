@@ -57,7 +57,7 @@ class TagController extends Controller
         $new_tag->slug = $slug;
         $new_tag->save();
 
-        return redirect()->route('admin.tags.index')->with('status', 'Il tag è stata correttamente creato');
+        return redirect()->back()->with('status', 'Il tag è stata correttamente creato');
     }
 
     /**
@@ -127,9 +127,9 @@ class TagController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Tag $tags)
-    {
-        $tags->delete();
+    public function destroy(Tag $tag)
+    {   
+        $tag->delete();
         return redirect()->route('admin.tags.index')->with('status', 'Tag eliminato');
     }
 }

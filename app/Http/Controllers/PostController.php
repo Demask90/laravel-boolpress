@@ -87,4 +87,9 @@ class PostController extends Controller
     {
         //
     }
+
+     // definisco la mia vista, si preoccuperà axios di recuperare i dati tramite chiamate api
+     public function listPostsApi() {
+        return view('api.home');
+    }
 }

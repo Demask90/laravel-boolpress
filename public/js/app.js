@@ -37268,33 +37268,17 @@ module.exports = function(module) {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js"); // primo metodo
-// window.confirmDelete = function() {
-//     const resp= confirm('vuoi cancellare?');
-//     if(!resp) {
-//         // non lancia la richiesta al server
-//         event.preventDefault();
-//     }
-// }
-
-
-var deleteform = document.querySelectorAll('.delete-post');
-deleteform.forEach(function (item) {
-  item.addEventListener('submit', function (e) {
-    var resp = confirm('Vuoi cancellare?');
-
-    if (!resp) {
-      e.preventDefault();
-    }
-  });
-});
-var alertDiv = document.querySelectorAll('.alert');
-
-if (alertDiv[0]) {
-  setTimeout(function () {
-    alertDiv[0].remove();
-  }, 2500);
-}
+/**
+ * First we will load all of this project's JavaScript dependencies which
+ * includes Vue and other libraries. It is a great starting point when
+ * building robust, powerful web applications using Vue and Laravel.
+ */
+__webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
+/**
+ * Next, we will create a fresh Vue application instance and attach it to
+ * the page. Then, you may begin adding components to this application
+ * or customize the JavaScript scaffolding to fit your unique needs.
+ */
 
 /***/ }),
 
@@ -37361,8 +37345,8 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Users\mdema\Desktop\Boolean\laravel\laravel-boolpress\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\Users\mdema\Desktop\Boolean\laravel\laravel-boolpress\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\Users\mdema\Desktop\Boolean\laravel-boolpress-route-api\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Users\mdema\Desktop\Boolean\laravel-boolpress-route-api\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

@@ -1,32 +1,16 @@
+/**
+ * First we will load all of this project's JavaScript dependencies which
+ * includes Vue and other libraries. It is a great starting point when
+ * building robust, powerful web applications using Vue and Laravel.
+ */
+
 require('./bootstrap');
 
-// primo metodo
 
-// window.confirmDelete = function() {
-//     const resp= confirm('vuoi cancellare?');
+/**
+ * Next, we will create a fresh Vue application instance and attach it to
+ * the page. Then, you may begin adding components to this application
+ * or customize the JavaScript scaffolding to fit your unique needs.
+ */
 
-//     if(!resp) {
-//         // non lancia la richiesta al server
-//         event.preventDefault();
-//     }
 
-// }
-
-let deleteform = document.querySelectorAll('.delete-post')
-
-deleteform.forEach(item => {
-    item.addEventListener('submit', function(e){
-        const resp = confirm('Vuoi cancellare?');
-
-        if(!resp) {
-            e.preventDefault();
-        }
-    })
-})
-
-const alertDiv = document.querySelectorAll('.alert');
-if(alertDiv[0]) {
-    setTimeout(()=>{
-        alertDiv[0].remove();
-    }, 2500)
-}

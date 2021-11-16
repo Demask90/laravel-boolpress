@@ -15,7 +15,12 @@ use Illuminate\Support\Facades\Auth;
 */
 /* Rotta che gestisce la homepage visibile agli utenti */
 Route::get('/', 'HomeController@index')->name('index');
+
+// mi definisco la rotta principale e il controller di riferimento che gestisce la views (listPostsApi)
+Route::get('/vue-posts', 'PostController@listPostsApi')->name('list-posts-api');
+
 Route::resource('/posts', 'PostController');
+
 /* Serie di rotte che gestiscono il meccanismo di autenticazione */
 Auth::routes();
 
@@ -29,4 +34,8 @@ Route::middleware('auth')->prefix('admin')->namespace('Admin')->name('admin.')
         Route::resource('/categories','CategoryController');
 
         Route::resource('/tags','TagController');
+
+        // rotta per la pagina profilo
+        Route::get('/profile', 'HomeController@profile')->name('profile');
+        Route::post('/generate-token', 'HomeController@generateToken')->name('generate-token');
     });

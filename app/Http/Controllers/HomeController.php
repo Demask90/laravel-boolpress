@@ -26,4 +26,5 @@ class HomeController extends Controller
         $posts = Post::all();
         return view('guest.home', compact('posts'));
     }
+
 }

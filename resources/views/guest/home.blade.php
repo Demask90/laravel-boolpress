@@ -87,7 +87,7 @@
 
             <div class="content d-flex flex-column align-items-center">
                 <h1 class="title m-b-md">
-                    IL MIO BLOG
+                    Il mio Blog
                 </h1>
                 <div class="d-flex links">
                     <a href="{{route('posts.index')}}">Posts</a>
