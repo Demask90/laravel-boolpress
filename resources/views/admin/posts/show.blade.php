@@ -10,6 +10,12 @@
                     <h3>Contenuto:</h3>
                     <p>{{$post->content}}</p>
                 </div>
+                @if($post->cover)
+                    <p>Immagine di copertina presente:</p>
+                    <img src="{{ asset('storage/'.$post->cover)}}" alt="{{ $post->title }}" class="img-fluid z-depth-1 rounded mb-4 my-cover">
+                @else
+                    <p>Nessuna copertina presente</p>
+                @endif
                 <div class="card-text mx-4">   
                     <h6>Visualizzazione del post numero: {{ $post->id }}</h6>
                     <h6>Categoria di appertenza: <a href="{{route('admin.categories.show', $post->category->id)}}">{{$post->category->name}}</a></h6>

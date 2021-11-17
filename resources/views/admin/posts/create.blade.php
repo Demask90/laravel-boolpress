@@ -32,7 +32,7 @@
                         </div>
                     </form>
                 </div>
-                <form action="{{ route('admin.posts.store') }}" method="POST">
+                <form action="{{ route('admin.posts.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     @method('POST')
                     <div class="form-group">
@@ -50,6 +50,17 @@
                             <div class="alert alert-danger">{{ $message }}</div>
                         @enderror
                     </div>
+
+                    {{-- inserimento immagina cover --}}
+                    <div class="form-group">
+                        <label class="d-block" for="image">Immagine di copertina</label>
+                        <input type="file" name="image" id="image" class="form-control @error('image') is-invalid @enderror">
+                        @error('image')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
+                    </div>
+                    {{-- inserimento immagina cover --}}
+                
                     <div class="form-group">
                         <label for="category_id">Categoria</label>
                         <select name="category_id" id="category_id" class="form-control">
